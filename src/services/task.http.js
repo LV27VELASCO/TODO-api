@@ -1,14 +1,14 @@
 const {
-verTodosLosUsuarios,
-verUsuarioPorId,
-crearUsuario,
-borrarUsuario,
-actualizarUsuario} = require('../controllers/users.controllers')
+verTodasLasTareas,
+verTareaPorId,
+crearTarea,
+borrarTarea,
+actualizarTarea} = require('../controllers/task.controllers')
 const express =require('express')
 
 
 const getAll = (req,res) => {
-    const data = verTodosLosUsuarios()
+    const data = verTodasLasTareas()
     res.status(200).json({
         item:data.length,
         response:data
@@ -19,7 +19,7 @@ const getAll = (req,res) => {
 const getById= (req,res) =>{
     const id = Number(req.params.id)
     if(id){
-    const data = verUsuarioPorId(id)
+    const data = verTareaPorId(id)
     if (data.id) {
         res.status(200).json(data)
     }else{
@@ -28,12 +28,12 @@ const getById= (req,res) =>{
     res.status(400).json({message:'Id not a number'})
 }}
 
-const createUser=(req,res)=>{
-    const userObj= req.body
+const createTask=(req,res)=>{
+    const taskObj= req.body
     
 
-    if(userObj){
-        const data = crearUsuario(userObj)
+    if(taskObj){
+        const data = crearTarea(taskObj)
         if (data) {
             res.status(200).json(data)
         }else{
@@ -45,9 +45,9 @@ const createUser=(req,res)=>{
 }
 
 
-const deleteUser= (req,res) =>{
+const deleteTask= (req,res) =>{
     const id =Number(req.params.id)
-    const data=borrarUsuario(id)
+    const data=borrarTarea(id)
 
     if (data) {
         res.status(204).json()
@@ -55,11 +55,11 @@ const deleteUser= (req,res) =>{
         res.status(400).json({message:'Invalid id'})}
 }
 
-const actualityUsers=(req,res)=>{
+const actualityTask=(req,res)=>{
     const id = Number(req.params.id)
-    const userObj = req.body
-    const data = actualizarUsuario(id,userObj)
-    if(userObj){
+    const taskObj = req.body
+    const data = actualizarTarea(id,taskObj)
+    if(taskObj){
         res.status(200).json()
     }else{
         res.status(400).json({message:'missing data'})
@@ -71,7 +71,7 @@ const actualityUsers=(req,res)=>{
 module.exports={
     getAll,
     getById,
-    createUser,
-    deleteUser,
-    actualityUsers
+    createTask,
+    deleteTask,
+    actualityTask
 }

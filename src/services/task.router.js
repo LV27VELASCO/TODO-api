@@ -1,16 +1,16 @@
 const router= require('express').Router()
-const {getAll,getById,createUser,deleteUser,actualityUsers} = require('./users.http')
+const {getAll,getById,createTask,deleteTask,actualityTask} = require('./task.http')
 
 
 
 router.route('/task')
 .get(getAll)
-.post(createUser)
+.post(createTask)
 
 router.route('/task/:id')
 .get(getById)
-.put(actualityUsers)
-.delete(deleteUser)
+.put(actualityTask)
+.delete(deleteTask)
 
 module.exports={
     router
